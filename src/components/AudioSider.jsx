@@ -1,12 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-
-// Simple PlayIcon and PauseIcon for demo:
-const PlayIcon = () => (
-  <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-    <path d="M8 5v14l11-7z" />
-  </svg>
-);
+import { PlayIcon } from "./common/Icons";
 
 const PauseIcon = () => (
   <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
@@ -88,7 +82,7 @@ const AudioSlider = ({ src, totalDuration = 720 }) => {
         max="100"
         value={value}
         onChange={onChange}
-        className="w-full h-2 bg-[#1a203d] rounded-lg appearance-none cursor-pointer accent-white"
+        className="w-full h-2 bg-[#1a203d] rounded-lg appearance-none pointer-events-none accent-white "
         style={{
           background: `linear-gradient(to right, white ${value}%, #1a203d ${value}%)`,
         }}
@@ -100,11 +94,11 @@ const AudioSlider = ({ src, totalDuration = 720 }) => {
       </div>
 
       <button
+        className="cursor-pointer"
         onClick={togglePlay}
         aria-label={isPlaying ? "Pause audio" : "Play audio"}
-        className="p-2 bg-blue-600 rounded-full hover:bg-blue-700 transition"
       >
-        {isPlaying ? <PauseIcon /> : <PlayIcon />}
+        <PlayIcon isPlaying={isPlaying} />
       </button>
     </div>
   );
