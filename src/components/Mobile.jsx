@@ -1,20 +1,14 @@
 "use client";
+
 import Image from "next/image";
-import Marquee from "react-fast-marquee";
-import AudioSlider from "./AudioSider";
-import {
-  Back,
-  CombineIcon,
-  NextIcon,
-  PlayIcon,
-  PrevIcon,
-  ShuffleIcon,
-  Title,
-} from "./common/Icons";
 import { useRef, useState } from "react";
+import Marquee from "react-fast-marquee";
+import { Back, PlayIcon, Title } from "./common/Icons";
+import AudioSlider from "./AudioSider";
+
 const Mobile = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = (useRef < HTMLAudioElement) | (null > null);
+  const audioRef = useRef(null);
 
   const toggleAudio = () => {
     if (!audioRef.current) return;
@@ -27,8 +21,10 @@ const Mobile = () => {
 
     setIsPlaying(!isPlaying);
   };
+
   return (
     <div className="bg-[#00092C] w-full max-w-[375px] mx-auto">
+      {/* Header */}
       <div className="flex justify-between px-4 pt-10">
         <div className="flex justify-between w-full">
           <Back />
@@ -40,13 +36,14 @@ const Mobile = () => {
         </div>
         <div className="w-full"></div>
       </div>
-      <div className="px-4 pt-10">
-        <div className="relative ">
-          <img className="w-full" src="/images/png/main.png" alt="pot" />
-          <div className="max-w-[100px] rounded-xl absolute left-0 bottom-0 overflow-hidden">
-            <div className="relative ">
-              <img className="w-full" src="/images/png/pot.png" alt="pot" />
 
+      {/* Main Image + Pot + Marquee Waves */}
+      <div className="px-4 pt-10">
+        <div className="relative">
+          <img className="w-full" src="/images/png/main.png" alt="main" />
+          <div className="max-w-[100px] rounded-xl absolute left-0 bottom-0 overflow-hidden">
+            <div className="relative">
+              <img className="w-full" src="/images/png/pot.png" alt="pot" />
               <div className="max-w-[100px] rotate-[-90deg] absolute top-10">
                 <Marquee speed={2} gradient={false}>
                   {Array.from({ length: 5 }).map((_, index) => (
@@ -63,7 +60,9 @@ const Mobile = () => {
           </div>
         </div>
       </div>
-      <div className=" text-white px-4 my-10">
+
+      {/* Text and Audio Section */}
+      <div className="text-white px-4 my-10">
         <Marquee speed={20} gradient={false}>
           <span className="whitespace-nowrap px-4 text-[28px]">
             री-कोड वॉटर डिवाइस की मदद से लत से मुक्त हो जाएँ — लत एक आजीवन
@@ -78,18 +77,15 @@ const Mobile = () => {
             बदल दिया था, और अब आप इसे फिर से बदलकर मुक्त हो सकते हैं!
           </span>
         </Marquee>
+
         <h1 className="text-[28px] font-semibold leading-[100%] text-white text-center pt-[28px] pb-5">
           Re-Coding...
         </h1>
 
-        {/* AUDIO ELEMENT */}
-        <audio src="/audio/sample.mp3" preload="auto" />
-        <div className="flex items-center justify-center max-w-[289px] mx-auto">
-          <span className="cursor-pointer">
-            <PlayIcon />
-          </span>
-        </div>
+        <AudioSlider src="/images/png/audio.mp3" totalDuration={720} />
       </div>
+
+      {/* Footer Image */}
       <Image
         src="/images/png/nav-bar-img.png"
         alt="navbar"
