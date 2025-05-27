@@ -41,22 +41,17 @@ const Mobile = () => {
       <div className="px-4 pt-10">
         <div className="relative">
           <img className="w-full" src="/images/png/main.png" alt="main" />
-          <div className="max-w-[100px] rounded-xl absolute left-0 bottom-0 overflow-hidden">
-            <div className="relative">
-              <img className="w-full" src="/images/png/pot.png" alt="pot" />
-              <div className="max-w-[100px] rotate-[-90deg] absolute top-10">
-                <Marquee speed={2} gradient={false}>
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <img
-                      key={index}
-                      className="w-full max-w-[85px]"
-                      src="/images/png/wave-2.png"
-                      alt="wave"
-                    />
-                  ))}
-                </Marquee>
-              </div>
-            </div>
+          <div className="max-w-[200px] rounded-xl absolute left-20 top-36 overflow-hidden rotate-[-90deg]">
+            <Marquee speed={2} gradient={false}>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <img
+                  key={index}
+                  className="w-full max-w-[125px]"
+                  src="/images/png/wave-2.png"
+                  alt="wave"
+                />
+              ))}
+            </Marquee>
           </div>
         </div>
       </div>
