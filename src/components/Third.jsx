@@ -4,40 +4,9 @@ import { Back, Title } from "./common/Icons";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import AudioSlider from "./AudioSider";
+import WiFiLayers from "./WiFiLayer";
 
 const Third = () => {
-  const [visibleFirst, setVisibleFirst] = useState(false);
-  const [visibleSecond, setVisibleSecond] = useState(false);
-  const [visibleThird, setVisibleThird] = useState(false);
-  const [visibleFourth, setVisibleFourth] = useState(false);
-  const [visibleFifth, setVisibleFifth] = useState(false);
-  const [visibleSixth, setVisibleSixth] = useState(false);
-
-  useEffect(() => {
-    let step = 5;
-    const stepsCount = 6;
-    const intervalDuration = 300;
-    const interval = setInterval(() => {
-      setVisibleFirst(false);
-      setVisibleSecond(false);
-      setVisibleThird(false);
-      setVisibleFourth(false);
-      setVisibleFifth(false);
-      setVisibleSixth(false);
-
-      if (step === 0) setVisibleFirst(true);
-      else if (step === 1) setVisibleSecond(true);
-      else if (step === 2) setVisibleThird(true);
-      else if (step === 3) setVisibleFourth(true);
-      else if (step === 4) setVisibleFifth(true);
-      else if (step === 5) setVisibleSixth(true);
-
-      step = (step - 1 + stepsCount) % stepsCount;
-    }, intervalDuration);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div>
       <div className="bg-[#00092C] w-full max-w-[375px] mx-auto">
@@ -45,7 +14,6 @@ const Third = () => {
           <div className="flex justify-between w-full">
             <Back />
           </div>
-
           <div className="w-full"></div>
         </div>
         <div className="flex w-full justify-center mt-5">
@@ -55,91 +23,12 @@ const Third = () => {
         <div className="px-4 pt-10">
           <div className="relative">
             <img className="w-full" src="/images/png/main.png" alt="main" />
-            <div
-              className="absolute left-[53%] -translate-x-1/2 top-18 rotate-[180deg] h-[70px]"
-              style={{
-                overflow: "hidden",
-                clipPath: "polygon(50% 100%, 0 0, 100% 0)",
-              }}
-            >
-              <div
-                style={{
-                  ...lineBaseStyle,
-                  width: "12rem",
-                  height: "12rem",
-                  borderColor: visibleFirst
-                    ? "#5DFEFE"
-                    : "rgba(255, 255, 204, 0.2)",
-                  transition: "border-color 0.5s ease-in-out",
-                  margin: "auto",
-                }}
-              >
-                <div
-                  style={{
-                    ...lineBaseStyle,
-                    width: "10rem",
-                    height: "10rem",
-                    borderColor: visibleSecond
-                      ? "#5DFEFE"
-                      : "rgba(255, 255, 204, 0.2)",
-                    transition: "border-color 0.5s ease-in-out",
-                  }}
-                >
-                  <div
-                    style={{
-                      ...lineBaseStyle,
-                      width: "8rem",
-                      height: "8rem",
-                      borderColor: visibleThird
-                        ? "#5DFEFE"
-                        : "rgba(255, 255, 204, 0.2)",
-                      transition: "border-color 0.5s ease-in-out",
-                    }}
-                  >
-                    <div
-                      style={{
-                        ...lineBaseStyle,
-                        width: "6rem",
-                        height: "6rem",
-                        borderColor: visibleFourth
-                          ? "#5DFEFE"
-                          : "rgba(255, 255, 204, 0.2)",
-                        transition: "border-color 0.5s ease-in-out",
-                      }}
-                    >
-                      <div
-                        style={{
-                          ...lineBaseStyle,
-                          width: "4rem",
-                          height: "4rem",
-                          borderColor: visibleFifth
-                            ? "#5DFEFE"
-                            : "rgba(255, 255, 204, 0.2)",
-                          transition: "border-color 0.5s ease-in-out",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: 15,
-                            height: 15,
-                            backgroundColor: visibleSixth
-                              ? "#5DFEFE"
-                              : "rgba(255, 255, 204, 0.2)",
-                            borderRadius: "50%",
-                            transition: "background-color 0.5s ease-in-out",
-                            marginBottom: 12,
-                            boxSizing: "border-box",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="max-w-[155px] overflow-hidden relative h-[200px] w-[500px] mt-[-336px] mx-auto flex flex-col justify-center ms-[104px]">
+              <WiFiLayers />
             </div>
           </div>
         </div>
-
+        <div className="h-[150px]"></div>
         <div className="text-white px-4 my-10">
           <Marquee speed={20} gradient={false}>
             <span className="whitespace-nowrap px-4 text-[28px]">
@@ -179,16 +68,6 @@ const Third = () => {
       </div>
     </div>
   );
-};
-
-const lineBaseStyle = {
-  border: "0.5rem solid black",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  borderRadius: "50%",
-  boxSizing: "border-box",
 };
 
 export default Third;
