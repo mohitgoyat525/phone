@@ -1,9 +1,9 @@
-import Mobile from "@/components/Mobile";
+import SecondVersion from "@/components/SecondVersion";
 
 export default function Home() {
   return (
     <>
-      <Mobile />
+      <SecondVersion />
     </>
   );
 }

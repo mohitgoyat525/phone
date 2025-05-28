@@ -39,13 +39,13 @@ const SecondVersion = () => {
           <div className="flex justify-between w-full">
             <Back />
           </div>
-          <div className="flex w-full justify-center">
+          <div className="flex w-full justify-center pt-10">
             <Title />
           </div>
           <div className="w-full"></div>
         </div>
 
-        <div className="px-4 pt-10 ">
+        <div className="px-4 pt-6">
           <div className="relative">
             <img className="w-full" src="/images/png/main.png" alt="main" />
             <div
@@ -134,8 +134,13 @@ const SecondVersion = () => {
             </span>
           </Marquee>
 
-          <h1 className="text-[28px] font-semibold leading-[100%] text-white text-center pt-[28px] pb-5">
-            Re-Coding...
+          <h1 className="text-[28px] font-semibold leading-[100%] text-white text-center pt-[28px] pb-5 flex justify-center items-center gap-1">
+            Re-Coding
+            <div className="flex gap-1">
+              <span className="dot">.</span>
+              <span className="dot dot2">.</span>
+              <span className="dot dot3">.</span>
+            </div>
           </h1>
 
           <AudioSlider src="/images/png/audio.mp3" totalDuration={720} />
