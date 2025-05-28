@@ -1,42 +1,37 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 
-const WiFiLayers = ({
-  visibleFirst,
-  visibleSecond,
-  visibleThird,
-  visibleFourth,
-  visibleFifth,
-  visibleSixth,
-  visibleSeventh,
-  visibleEighth,
-  visibleNinth,
-  visibleTenth,
-  visibleEleventh,
-  visibleTwelfth,
-  visibleThirteenth,
-  visibleFourteenth,
-  visibleFifteenth,
-  visibleSixteenth,
-  visibleSeventeenth,
-  visibleEighteenth,
-  visibleNineteenth,
-  visibleTwentieth,
-}) => {
-  const borderColor = (visible) =>
-    visible ? "border-[#5DFEFE]" : "border-[rgba(255,255,204,0.2)]";
+const LAYERS_COUNT = 20;
 
-  const bgColor = (visible) =>
-    visible ? "bg-[#5DFEFE]" : "bg-[rgba(255,255,204,0.2)]";
+const WiFiLayers = () => {
+  const [visibleIndex, setVisibleIndex] = useState(0);
 
-  const ring = (visible, size, children) => (
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleIndex((prev) => (prev + 1) % LAYERS_COUNT);
+    }, 200); // Adjust delay as needed (in ms)
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const borderColor = (index) =>
+    index <= visibleIndex
+      ? "border-[#5DFEFE]"
+      : "border-[rgba(255,255,204,0.2)]";
+
+  const bgColor = (index) =>
+    index === 0 && visibleIndex >= 0
+      ? "bg-[#5DFEFE]"
+      : "bg-[rgba(255,255,204,0.2)]";
+
+  const ring = (index, size, children) => (
     <div
       className={clsx(
-        "flex justify-center items-center flex-col rounded-full border-8",
-        borderColor(visible),
+        "flex justify-center items-center flex-col rounded-full border-7",
+        borderColor(index),
         "transition-all duration-500 ease-in-out",
-        visible && "animate-ping-slow",
+        index === visibleIndex && "animate-ping-slow",
         size
       )}
     >
@@ -44,96 +39,54 @@ const WiFiLayers = ({
     </div>
   );
 
+  // Build nested layers
+  const buildLayers = () => {
+    let content = (
+      <div
+        className={clsx(
+          "w-4 h-4 rounded-full mb-2",
+          bgColor(0),
+          "transition-colors duration-500 ease-in-out",
+          visibleIndex === 0 && "animate-ping-slow"
+        )}
+      />
+    );
+
+    const sizes = [
+      "w-[2rem] h-[2rem]",
+      "w-[3.5rem] h-[3.5rem]",
+      "w-[4rem] h-[4rem]",
+      "w-[5rem] h-[5rem]",
+      "w-[6rem] h-[6rem]",
+      "w-[7rem] h-[7rem]",
+      "w-[8rem] h-[8rem]",
+      "w-[9rem] h-[9rem]",
+      "w-[10rem] h-[10rem]",
+      "w-[12rem] h-[12rem]",
+      "w-[14rem] h-[14rem]",
+      "w-[16rem] h-[16rem]",
+      "w-[18rem] h-[18rem]",
+      "w-[19rem] h-[20rem]",
+      "w-[21rem] h-[22rem]",
+      "w-[23rem] h-[24rem]",
+      "w-[25rem] h-[26rem]",
+      "w-[27rem] h-[28rem]",
+      "w-[29rem] h-[30rem]",
+    ];
+
+    for (let i = 1; i < LAYERS_COUNT; i++) {
+      content = ring(i, sizes[i - 1] || "w-[1rem] h-[1rem]", content);
+    }
+
+    return content;
+  };
+
   return (
     <div
-      className="absolute left-[53%] -translate-x-1/2 top-18 rotate-180 overflow-hidden h-[153px]"
-      style={{ clipPath: "polygon(50% 100%, 0 -15%, 101% 0)" }}
+      className="absolute left-[53%] -translate-x-1/2 top-18 rotate-180 overflow-hidden h-[165px]"
+      style={{ clipPath: "polygon(50% 100%, 0 -18%, 101% 0)" }}
     >
-      {ring(
-        visibleTwentieth,
-        "w-[28rem] h-[28rem]",
-        ring(
-          visibleNineteenth,
-          "w-[26rem] h-[26rem]",
-          ring(
-            visibleEighteenth,
-            "w-[24rem] h-[24rem]",
-            ring(
-              visibleSeventeenth,
-              "w-[22rem] h-[22rem]",
-              ring(
-                visibleSixteenth,
-                "w-[20rem] h-[20rem]",
-                ring(
-                  visibleFifteenth,
-                  "w-[18rem] h-[18rem]",
-                  ring(
-                    visibleFourteenth,
-                    "w-[16rem] h-[16rem]",
-                    ring(
-                      visibleThirteenth,
-                      "w-[14rem] h-[14rem]",
-                      ring(
-                        visibleTwelfth,
-                        "w-[12rem] h-[12rem]",
-                        ring(
-                          visibleEleventh,
-                          "w-[10rem] h-[10rem]",
-                          ring(
-                            visibleTenth,
-                            "w-[9rem] h-[9rem]",
-                            ring(
-                              visibleNinth,
-                              "w-[8rem] h-[8rem]",
-                              ring(
-                                visibleEighth,
-                                "w-[7rem] h-[7rem]",
-                                ring(
-                                  visibleSeventh,
-                                  "w-[6rem] h-[6rem]",
-                                  ring(
-                                    visibleSixth,
-                                    "w-[5rem] h-[5rem]",
-                                    ring(
-                                      visibleFifth,
-                                      "w-[4rem] h-[4rem]",
-                                      ring(
-                                        visibleFourth,
-                                        "w-[3.5rem] h-[3.5rem]",
-                                        ring(
-                                          visibleThird,
-                                          "w-[3rem] h-[3rem]",
-                                          ring(
-                                            visibleSecond,
-                                            "w-[2.5rem] h-[2.5rem]",
-                                            <div
-                                              className={clsx(
-                                                "w-4 h-4 rounded-full mb-3",
-                                                bgColor(visibleFirst),
-                                                "transition-colors duration-500 ease-in-out",
-                                                visibleFirst &&
-                                                  "animate-ping-slow"
-                                              )}
-                                            />
-                                          )
-                                        )
-                                      )
-                                    )
-                                  )
-                                )
-                              )
-                            )
-                          )
-                        )
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-      )}
+      {buildLayers()}
     </div>
   );
 };

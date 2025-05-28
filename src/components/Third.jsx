@@ -23,12 +23,12 @@ const Third = () => {
         <div className="px-4 pt-10">
           <div className="relative">
             <img className="w-full" src="/images/png/main.png" alt="main" />
-            <div className="max-w-[155px] overflow-hidden relative h-[200px] w-[500px] mt-[-336px] mx-auto flex flex-col justify-center ms-[104px]">
+            <div className="max-w-[155px] overflow-hidden relative h-[290px] w-[500px] mt-[-336px] mx-auto flex flex-col justify-center ms-[104px]">
               <WiFiLayers />
             </div>
           </div>
         </div>
-        <div className="h-[150px]"></div>
+        <div className="h-[50px]"></div>
         <div className="text-white px-4 my-10">
           <Marquee speed={20} gradient={false}>
             <span className="whitespace-nowrap px-4 text-[28px]">
