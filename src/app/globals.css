@@ -4,28 +4,30 @@ body {
   background: #00092c;
 }
 .dot {
-  display: inline-block;
-  animation: blink 1.5s infinite;
-  animation-delay: 0s;
+  font-size: 24px;
+  opacity: 0.2;
+  animation: none;
 }
 
-.dot2 {
+.dot-animate .dot {
+  animation: blink 1.2s infinite;
+}
+
+.dot-animate .dot2 {
   animation-delay: 0.2s;
 }
 
-.dot3 {
+.dot-animate .dot3 {
   animation-delay: 0.4s;
 }
 
 @keyframes blink {
   0%,
-  20% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
+  80%,
   100% {
-    opacity: 0;
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
   }
 }

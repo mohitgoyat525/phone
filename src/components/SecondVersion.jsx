@@ -6,31 +6,26 @@ import Image from "next/image";
 import AudioSlider from "./AudioSider";
 
 const SecondVersion = () => {
-  const [visibleFirst, setVisibleFirst] = useState(false);
-  const [visibleSecond, setVisibleSecond] = useState(false);
-  const [visibleThird, setVisibleThird] = useState(false);
-  const [visibleFourth, setVisibleFourth] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [step, setStep] = useState(null);
 
   useEffect(() => {
-    let step = 3;
+    if (!isPlaying) return;
+
     const stepsCount = 4;
     const intervalDuration = 300;
+
     const interval = setInterval(() => {
-      setVisibleFirst(false);
-      setVisibleSecond(false);
-      setVisibleThird(false);
-      setVisibleFourth(false);
-
-      if (step === 0) setVisibleFirst(true);
-      else if (step === 1) setVisibleSecond(true);
-      else if (step === 2) setVisibleThird(true);
-      else if (step === 3) setVisibleFourth(true);
-
-      step = (step - 1 + stepsCount) % stepsCount;
+      setStep((prev) => (prev - 1 + stepsCount) % stepsCount);
     }, intervalDuration);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPlaying]);
+
+  const visibleFirst = step === 0;
+  const visibleSecond = step === 1;
+  const visibleThird = step === 2;
+  const visibleFourth = step === 3;
 
   return (
     <div>
@@ -122,28 +117,25 @@ const SecondVersion = () => {
             <span className="whitespace-nowrap px-4 text-[28px]">
               री-कोड वॉटर डिवाइस की मदद से लत से मुक्त हो जाएँ — लत एक आजीवन
               कारावास की तरह लग सकती है, लेकिन इसके बारे में कुछ करने का निर्णय
-              लेने से ही आप पहले ही मुक्ति की ओर पहला कदम उठा चुके हैं। री-कोड
-              वॉटर आपको उस यात्रा को पूरा करने में हर कदम पर मदद कर सकता है। मन
-              व्यसनी व्यवहार में एक प्रमुख भूमिका निभाता है और Re-code Water मन
-              के उस हिस्से तक पहुँचने के लिए सबसे अच्छी री-कोड वॉटर तकनीकों का
-              उपयोग करते हैं जो लत को बनाए रखता है। यह आपको वह करने में सक्षम
-              बनाता है जो आप पहले भी कर चुके हैं - अपने दिमाग में "प्रोग्राम" को
-              बदलने के लिए। आखिरकार, जब आप लत विकसित करना शुरू करते हैं तो आपने
-              प्रोग्राम बदल दिया था, और अब आप इसे फिर से बदलकर मुक्त हो सकते
-              हैं!
+              लेने से ही आप पहले ही मुक्ति की ओर पहला कदम उठा चुके हैं...
             </span>
           </Marquee>
 
           <h1 className="text-[28px] font-semibold leading-[100%] text-white text-center pt-[28px] pb-5 flex justify-center items-center gap-1">
             Re-Coding
-            <div className="flex gap-1">
+            <div className={`flex gap-1 ${isPlaying ? "dot-animate" : ""}`}>
               <span className="dot">.</span>
               <span className="dot dot2">.</span>
               <span className="dot dot3">.</span>
             </div>
           </h1>
 
-          <AudioSlider src="/images/png/audio.mp3" totalDuration={720} />
+          <AudioSlider
+            src="/images/png/audio.mp3"
+            totalDuration={720}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+          />
         </div>
 
         <Image
